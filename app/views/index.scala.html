@@ -1,0 +1,25 @@
+@import extensions.ToHuman.ZonedDateTime
+@(users: List[PersistedUser])
+
+@main("List of Users") {
+  <h1>List of Users</h1>
+  <p><a href="@routes.HomeController.register">New User</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(user <- users) {
+        <tr>
+          <td><a href="@routes.HomeController.registerSuccess(user.uuid)">@user.name</a></td>
+          <td>@user.email</td>
+          <td>@user.createdAt.toHuman</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

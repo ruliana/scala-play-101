@@ -1,0 +1,20 @@
+@import helper._
+@(user: Form[TransientUser])(implicit request: MessagesRequestHeader)
+
+@main("Register User") {
+  <h1>Fill the form</h1>
+  @if(user.hasGlobalErrors) {
+    <ul>
+      @for(error <- user.globalErrors) {
+        <li>@error.format</li>
+      }
+    </ul>
+  }
+
+  @form(routes.HomeController.register()) {
+    @CSRF.formField
+    @inputText(user("name"), 'id -> "name")
+    @inputText(user("email"), 'id -> "email")
+    <input type="submit" value="submit"/>
+  }
+}
